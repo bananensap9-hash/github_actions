@@ -8,6 +8,7 @@ jobs:
     env:
       DAY_OF_WEEK: ${{ secrets.DAY_OF_WEEK }}
       Greeting: ${{ secrets.GREETING }}
+    environment: Int  # ← GitHub utilise cet environnement    
     steps:
       - name: "Dites Salut Mona nous sommes lundi"
         run: echo "$Greeting $First_Name. Nous sommes $DAY_OF_WEEK!"
