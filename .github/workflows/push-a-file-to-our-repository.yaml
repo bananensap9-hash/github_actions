@@ -19,7 +19,8 @@ jobs:
 
       - name: Install and run tests
         run: |
-          python3 -m pip install pytest
+          python3 -m pip install --user pytest
+          export PATH=$PATH:$HOME/.local/bin
           python3 -m pytest --tb=short 2>&1 | tee log_pytest.txt || true
       
       - name: Push a file to our repository
