@@ -17,14 +17,12 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install dependencies
-        run: pip install pytest
-
       - name: Push a file to our repository
         env:
           ACTOR: ${{ github.actor }}
           REPOSITORY: ${{ github.repository }}
         run: |
+          pip install pytest
           pwd
           ls -a
           git init
@@ -40,4 +38,3 @@ jobs:
           git add .
           git commit -m "random file from action"
           git push
-
