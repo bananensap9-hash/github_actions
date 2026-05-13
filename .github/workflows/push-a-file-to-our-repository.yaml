@@ -3,27 +3,29 @@ name: Push a file to our repository
 on: workflow_dispatch
 
 jobs:
-  
   create_commit:
-  runs-on: ubuntu-latest
-  permissions:
-    contents: write
-  environnement: Int # ← GitHub utilise cet environnement    
-  steps:
-    - name: Push a file to our repository
-      run: |
-        pwd
-        ls -a 
-        git init
-        git remote add origin "https://$ACTOR:${{ secrets.TOKEN }}@github.com/$REPOSITORY.git" 
-        git config --global user.email "my-bot@bot.com"
-        git config --global user.name "my-bot"
-        git fetch
-        git checkout main
-        git branch --set-upstream-to=origin/main
-        git pull
-        pytest >> log_pytest.txt
-        ls -a
-        git add .
-        git commit -m "random file from action"
-        git push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    environment: Int
+    steps:
+      - name: Push a file to our repository
+        env:
+          ACTOR: ${{ github.actor }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          pwd
+          ls -a
+          git init
+          git remote add origin "https://$ACTOR:${{ secrets.TOKEN }}@github.com/$REPOSITORY.git"
+          git config --global user.email "my-bot@bot.com"
+          git config --global user.name "my-bot"
+          git fetch
+          git checkout main
+          git branch --set-upstream-to=origin/main
+          git pull
+          pytest >> log_pytest.txt
+          ls -a
+          git add .
+          git commit -m "random file from action"
+          git push
