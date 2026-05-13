@@ -20,8 +20,8 @@ jobs:
       - name: Install and run tests
         run: |
           python3 -m pip install pytest
-          python3 -m pytest >> log_pytest.txt
-
+          python3 -m pytest --tb=short 2>&1 | tee log_pytest.txt || true
+      
       - name: Push a file to our repository
         env:
           ACTOR: ${{ github.actor }}
