@@ -9,9 +9,8 @@ jobs:
       contents: write
     environment: Int
     steps:
-      - name: Install pytest
-        run: |
-          pip install pytest
+      - name: Install dependencies
+        run: pip install pytest
 
       - name: Push a file to our repository
         env:
