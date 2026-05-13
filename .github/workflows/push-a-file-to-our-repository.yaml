@@ -30,10 +30,9 @@ jobs:
         run: |
           pwd
           ls -a
-          git init
-          git remote add origin "https://$ACTOR:${{ secrets.TOKEN }}@github.com/$REPOSITORY.git"
           git config --global user.email "my-bot@bot.com"
           git config --global user.name "my-bot"
+          git remote set-url origin "https://$ACTOR:${{ secrets.TOKEN }}@github.com/$REPOSITORY.git"
           git fetch
           git checkout main
           git branch --set-upstream-to=origin/main
