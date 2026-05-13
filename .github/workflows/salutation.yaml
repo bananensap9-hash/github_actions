@@ -1,0 +1,16 @@
+name: salutation sur un jour quelconque
+
+on: workflow_dispatch
+
+jobs:
+  greeting_job:
+    runs-on: ubuntu-latest
+    env:
+      DAY_OF_WEEK: ${{ secrets.DAY_OF_WEEK }}
+      Greeting: ${{ secrets.GREETING }}
+    environment: Int  # ← GitHub utilise cet environnement    
+    steps:
+      - name: "Dites Salut Mona nous sommes lundi"
+        run: echo "$Greeting $First_Name. Nous sommes $DAY_OF_WEEK!"
+        env:
+          First_Name: ${{ secrets.FIRST_NAME }}
