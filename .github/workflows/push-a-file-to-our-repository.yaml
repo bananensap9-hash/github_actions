@@ -17,12 +17,16 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install and run tests
+        run: |
+          python3 -m pip install pytest
+          python3 -m pytest >> log_pytest.txt
+
       - name: Push a file to our repository
         env:
           ACTOR: ${{ github.actor }}
           REPOSITORY: ${{ github.repository }}
         run: |
-          python3 -m pip install pytest
           pwd
           ls -a
           git init
@@ -33,7 +37,6 @@ jobs:
           git checkout main
           git branch --set-upstream-to=origin/main
           git pull
-          python3 -m pytest >> log_pytest.txt
           ls -a
           git add .
           git commit -m "random file from action"
